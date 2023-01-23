@@ -1,14 +1,13 @@
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 
-import { AppController } from 'src/app.controller';
-import { AppService } from 'src/app.service';
 import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
+import { User } from 'src/users/users.model';
 
 @Module({
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
   imports: [
     ConfigModule.forRoot({ envFilePath: '.env' }),
     SequelizeModule.forRoot({
@@ -18,7 +17,7 @@ import { ConfigModule } from '@nestjs/config';
       username: process.env.DB_USER,
       password: process.env.DB_PASDWORD,
       database: process.env.DB_NAME,
-      models: [],
+      models: [User],
       autoLoadModels: true,
     }),
     UsersModule,
